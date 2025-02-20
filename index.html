@@ -40,6 +40,7 @@
 
 <body>
   <h1>Monitoraggio Raggi Cosmici</h1>
+  <button id="button">Reset</button>
   <table id="cosmicTable">
     <thead>
       <tr>
@@ -56,7 +57,7 @@
 
   <script>
     let data = JSON.parse(localStorage.getItem("cosmicData")) || [
-      { time: "19:04:44", energy: "2.71e+08", type: "Muone", dir: 349, flux: 27.1 },
+      { time: "19:01:44", energy: "2.71e+08", type: "Muone", dir: 349, flux: 27.1 },
       { time: "18:53:36", energy: "5.65e+08", type: "Elettrone", dir: 262, flux: 34.3 },
       { time: "18:49:30", energy: "2.05e+08", type: "Muone", dir: 347, flux: 29.3 },
       { time: "18:30:25", energy: "5.29e+08", type: "Muone", dir: 316, flux: 23.8 },
@@ -96,6 +97,10 @@
       const currentHour = new Date().getHours()
       const currentSeconds = new Date().getSeconds()
       const roundedMinute = Math.floor(currentMinute / 10) * 10;
+
+      if (currentHour < 19) {
+        return;
+      }
 
       if ([10, 50].includes(roundedMinute)) {
         data.push({
