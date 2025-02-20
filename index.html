@@ -95,7 +95,7 @@
       const currentSeconds = new Date().getSeconds()
       const roundedMinute = Math.floor(currentMinute / 10) * 10;
 
-      if ([10, 50].includes(currentMinute)) {
+      if ([10, 50].includes(roundedMinute)) {
         data.push({
           time: `${currentHour}:${currentMinute.toString().padStart(2, '0')}:${currentSeconds.toString().padStart(2, '0')}`,
           energy: "9.8e11",
