@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoraggio Raggi Cosmici</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #333;
+      color: white;
+    }
+
+    .anomaly {
+      background-color: red;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Monitoraggio Raggi Cosmici</h1>
+  <table id="cosmicTable">
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Energy (eV)</th>
+        <th>Particle Type</th>
+        <th>Arrival Direction (°)</th>
+        <th>Detected Flux</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+    let data = JSON.parse(localStorage.getItem("cosmicData")) || [
+      { time: "15:00:28", energy: "6.01e+08", type: "Muone", dir: 135, flux: 10.7 },
+      { time: "15:10:30", energy: "8.59e+08", type: "Muone", dir: 63, flux: 39.0 },
+      { time: "15:20:48", energy: "5.12e+08", type: "Muone", dir: 85, flux: 42.3 },
+      { time: "15:30:11", energy: "1.86e+08", type: "Muone", dir: 261, flux: 35.8 },
+      { time: "15:40:58", energy: "4.05e+08", type: "Muone", dir: 30, flux: 31.2 },
+      { time: "15:50:02", energy: "4.06e+08", type: "Protone", dir: 62, flux: 41.0 },
+      { time: "16:00:36", energy: "6.18e+08", type: "Muone", dir: 64, flux: 24.5 },
+      { time: "16:10:04", energy: "3.55e+08", type: "Muone", dir: 225, flux: 46.2 },
+      { time: "16:20:32", energy: "3.36e+08", type: "Muone", dir: 341, flux: 31.2 },
+      { time: "16:30:16", energy: "8.06e+08", type: "Muone", dir: 174, flux: 16.7 },
+      { time: "16:40:47", energy: "9.27e+08", type: "Muone", dir: 221, flux: 22.2 },
+      { time: "16:50:41", energy: "1.28e+08", type: "Muone", dir: 257, flux: 10.8 },
+      { time: "17:00:45", energy: "9.08e+08", type: "Muone", dir: 182, flux: 38.6 },
+      { time: "17:10:45", energy: "5.93e+08", type: "Muone", dir: 79, flux: 23.0 },
+      { time: "17:20:24", energy: "9.30e+08", type: "Muone", dir: 56, flux: 27.2 },
+      { time: "17:30:08", energy: "5.84e+08", type: "Muone", dir: 319, flux: 20.9 },
+      { time: "17:40:22", energy: "7.51e+08", type: "Protone", dir: 157, flux: 27.7 },
+      { time: "17:50:55", energy: "1.94e+08", type: "Elettrone", dir: 330, flux: 31.5 },
+      { time: "18:00:56", energy: "1.15e+08", type: "Muone", dir: 20, flux: 24.5 },
+      { time: "18:10:03", energy: "3.75e+07", type: "Muone", dir: 185, flux: 29.1 },
+      { time: "18:20:09", energy: "5.72e+08", type: "Protone", dir: 203, flux: 10.7 },
+      { time: "18:30:59", energy: "9.87e+08", type: "Muone", dir: 2, flux: 29.0 },
+      { time: "18:40:37", energy: "1.56e+08", type: "Elettrone", dir: 341, flux: 13.5 },
+      { time: "18:50:48", energy: "2.95e+08", type: "Muone", dir: 70, flux: 45.7 },
+      { time: "19:00:08", energy: "6.57e+08", type: "Muone", dir: 358, flux: 19.0 }
+    ];
+
+    function saveData() {
+      localStorage.setItem("cosmicData", JSON.stringify(data));
+    }
+
+
+    function updateTable() {
+      let tableBody = document.querySelector("#cosmicTable tbody");
+      let newRow = document.createElement("tr");
+      const currentMinute = new Date().getMinutes()
+      const currentHour = new Date().getHours()
+      const currentSeconds = new Date().getSeconds()
+      const roundedMinute = Math.floor(currentMinute / 10) * 10;
+
+      if ([10, 50].includes(currentMinute)) {
+        data.push({
+          time: `${currentHour}:${currentMinute.toString().padStart(2, '0')}:${currentSeconds.toString().padStart(2, '0')}`,
+          energy: "9.8e11",
+          type: "Protone",
+          dir: 180,
+          flux: 502,
+          anomaly: true
+        });
+
+        saveData();
+      } else {
+        let types = ["Muone", "Muone", "Muone", "Muone", "Elettrone", "Fotone", "kaone"];
+        let type = types[Math.floor(Math.random() * types.length)];
+
+        let newData = {
+          time: `${currentHour}:${currentMinute.toString().padStart(2, '0')}:${currentSeconds.toString().padStart(2, '0')}`,
+          energy: (Math.random() * (1e12 - 1e9) + 1e9).toExponential(2),
+          type,
+          dir: Math.floor(Math.random() * 360),
+          flux: (Math.random() * 50).toFixed(1)
+        };
+        data.push(newData);
+        saveData();
+      }
+
+      let lastEntry = data[data.length - 1];
+      newRow.innerHTML = `
+                <td>${lastEntry.time}</td>
+                <td>${lastEntry.energy}</td>
+                <td>${lastEntry.type}</td>
+                <td>${lastEntry.dir}</td>
+                <td class="${lastEntry.anomaly ? 'anomaly' : ''}">${lastEntry.flux}</td>
+            `;
+
+      tableBody.appendChild(newRow);
+    }
+
+    // Aggiungiamo i dati iniziali
+    data.forEach(entry => {
+      let tableBody = document.querySelector("#cosmicTable tbody");
+      let newRow = document.createElement("tr");
+      newRow.innerHTML = `
+                <td>${entry.time}</td>
+                <td>${entry.energy}</td>
+                <td>${entry.type}</td>
+                <td>${entry.dir}</td>
+                <td>${entry.flux}</td>
+            `;
+      tableBody.appendChild(newRow);
+    });
+
+    function getRandomInterval() {
+      let minutes = Math.floor(Math.random() * (10 - 7 + 1) + 5); // Numero casuale tra 5 e 10 minuti
+      let seconds = Math.floor(Math.random() * 60); // Numero casuale tra 0 e 59 secondi
+      return (minutes * 60 + seconds) * 1000; // Converti in millisecondi
+    }
+
+    // setInterval(updateTable, getRandomInterval());
+    setInterval(updateTable, 5000);
+  </script>
+</body>
+
+</html>
