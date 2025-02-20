@@ -9,6 +9,7 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
+      padding-bottom: 10vh
     }
 
     table {
@@ -55,32 +56,33 @@
 
   <script>
     let data = JSON.parse(localStorage.getItem("cosmicData")) || [
-      { time: "15:00:28", energy: "6.01e+08", type: "Muone", dir: 135, flux: 10.7 },
-      { time: "15:10:30", energy: "8.59e+08", type: "Muone", dir: 63, flux: 39.0 },
-      { time: "15:20:48", energy: "5.12e+08", type: "Muone", dir: 85, flux: 42.3 },
-      { time: "15:30:11", energy: "1.86e+08", type: "Muone", dir: 261, flux: 35.8 },
-      { time: "15:40:58", energy: "4.05e+08", type: "Muone", dir: 30, flux: 31.2 },
-      { time: "15:50:02", energy: "4.06e+08", type: "Protone", dir: 62, flux: 41.0 },
-      { time: "16:00:36", energy: "6.18e+08", type: "Muone", dir: 64, flux: 24.5 },
-      { time: "16:10:04", energy: "3.55e+08", type: "Muone", dir: 225, flux: 46.2 },
-      { time: "16:20:32", energy: "3.36e+08", type: "Muone", dir: 341, flux: 31.2 },
-      { time: "16:30:16", energy: "8.06e+08", type: "Muone", dir: 174, flux: 16.7 },
-      { time: "16:40:47", energy: "9.27e+08", type: "Muone", dir: 221, flux: 22.2 },
-      { time: "16:50:41", energy: "1.28e+08", type: "Muone", dir: 257, flux: 10.8 },
-      { time: "17:00:45", energy: "9.08e+08", type: "Muone", dir: 182, flux: 38.6 },
-      { time: "17:10:45", energy: "5.93e+08", type: "Muone", dir: 79, flux: 23.0 },
-      { time: "17:20:24", energy: "9.30e+08", type: "Muone", dir: 56, flux: 27.2 },
-      { time: "17:30:08", energy: "5.84e+08", type: "Muone", dir: 319, flux: 20.9 },
-      { time: "17:40:22", energy: "7.51e+08", type: "Protone", dir: 157, flux: 27.7 },
-      { time: "17:50:55", energy: "1.94e+08", type: "Elettrone", dir: 330, flux: 31.5 },
-      { time: "18:00:56", energy: "1.15e+08", type: "Muone", dir: 20, flux: 24.5 },
-      { time: "18:10:03", energy: "3.75e+07", type: "Muone", dir: 185, flux: 29.1 },
-      { time: "18:20:09", energy: "5.72e+08", type: "Protone", dir: 203, flux: 10.7 },
-      { time: "18:30:59", energy: "9.87e+08", type: "Muone", dir: 2, flux: 29.0 },
-      { time: "18:40:37", energy: "1.56e+08", type: "Elettrone", dir: 341, flux: 13.5 },
-      { time: "18:50:48", energy: "2.95e+08", type: "Muone", dir: 70, flux: 45.7 },
-      { time: "19:00:08", energy: "6.57e+08", type: "Muone", dir: 358, flux: 19.0 }
+      { time: "19:04:44", energy: "2.71e+08", type: "Muone", dir: 349, flux: 27.1 },
+      { time: "18:53:36", energy: "5.65e+08", type: "Elettrone", dir: 262, flux: 34.3 },
+      { time: "18:49:30", energy: "2.05e+08", type: "Muone", dir: 347, flux: 29.3 },
+      { time: "18:30:25", energy: "5.29e+08", type: "Muone", dir: 316, flux: 23.8 },
+      { time: "18:24:46", energy: "9.05e+08", type: "Muone", dir: 37, flux: 37.5 },
+      { time: "18:15:11", energy: "5.28e+08", type: "Elettrone", dir: 238, flux: 19.9 },
+      { time: "18:01:17", energy: "4.29e+08", type: "Muone", dir: 257, flux: 37.3 },
+      { time: "17:55:14", energy: "4.99e+08", type: "Muone", dir: 80, flux: 17.9 },
+      { time: "17:45:55", energy: "9.64e+08", type: "Muone", dir: 359, flux: 41.6 },
+      { time: "17:30:30", energy: "9.67e+08", type: "Muone", dir: 290, flux: 12.7 },
+      { time: "17:22:36", energy: "2.93e+08", type: "Muone", dir: 12, flux: 20.2 },
+      { time: "17:17:55", energy: "4.14e+08", type: "Elettrone", dir: 203, flux: 20.3 },
+      { time: "17:00:28", energy: "4.87e+08", type: "Muone", dir: 114, flux: 28.3 },
+      { time: "16:57:08", energy: "1.64e+08", type: "Muone", dir: 295, flux: 19.9 },
+      { time: "16:42:06", energy: "1.64e+08", type: "Muone", dir: 141, flux: 28.7 },
+      { time: "16:37:22", energy: "1.68e+08", type: "Muone", dir: 248, flux: 42.7 },
+      { time: "16:28:13", energy: "6.72e+08", type: "Protone", dir: 237, flux: 16.3 },
+      { time: "16:17:53", energy: "4.29e+08", type: "Elettrone", dir: 315, flux: 16.7 },
+      { time: "16:09:17", energy: "7.71e+08", type: "Muone", dir: 115, flux: 17.2 },
+      { time: "15:52:49", energy: "1.91e+08", type: "Elettrone", dir: 266, flux: 49.0 },
+      { time: "15:46:52", energy: "5.29e+08", type: "Muone", dir: 310, flux: 24.5 },
+      { time: "15:37:26", energy: "5.41e+08", type: "Muone", dir: 182, flux: 15.7 },
+      { time: "15:27:29", energy: "5.57e+08", type: "Muone", dir: 340, flux: 42.6 },
+      { time: "15:16:02", energy: "3.19e+08", type: "Muone", dir: 91, flux: 44.7 },
+      { time: "15:03:35", energy: "7.23e+08", type: "Muone", dir: 98, flux: 45.4 }
     ];
+
 
     function saveData() {
       localStorage.setItem("cosmicData", JSON.stringify(data));
@@ -130,7 +132,7 @@
                 <td class="${lastEntry.anomaly ? 'anomaly' : ''}">${lastEntry.flux}</td>
             `;
 
-      tableBody.appendChild(newRow);
+      tableBody.insertBefore(newRow, tableBody.firstChild);
     }
 
     // Aggiungiamo i dati iniziali
@@ -153,8 +155,8 @@
       return (minutes * 60 + seconds) * 1000; // Converti in millisecondi
     }
 
-    setInterval(updateTable, getRandomInterval());
-    // setInterval(updateTable, 5000);
+    // setInterval(updateTable, getRandomInterval());
+    setInterval(updateTable, 5000);
   </script>
 </body>
 
