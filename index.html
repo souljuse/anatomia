@@ -100,7 +100,7 @@
         return;
       }
 
-      if ([21, 22, 23, 24, 25, 54, 55, 56, 57, 58].includes(currentMinute)) {
+      if ([21, 22, 23, 54, 55, 56].includes(currentMinute)) {
         data.push({
           time: `${currentHour}:${currentMinute.toString().padStart(2, '0')}:${currentSeconds.toString().padStart(2, '0')}`,
           energy: "505.0000",
@@ -152,7 +152,7 @@
     });
 
     function getRandomInterval() {
-      let minutes = Math.floor(Math.random() * (10 - 7 + 1)); // Numero casuale tra 5 e 10 minuti
+      let minutes = Math.floor(Math.random() * (10 - 7 + 1)); // Numero casuale tra 0 e 4
       let seconds = Math.floor(Math.random() * 60); // Numero casuale tra 0 e 59 secondi
       return (minutes * 60 + seconds) * 1000; // Converti in millisecondi
     }
